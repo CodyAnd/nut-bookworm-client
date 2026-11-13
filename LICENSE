@@ -1,0 +1,5 @@
+This repository contains project documentation and build orchestration maintained by the repository owner.
+
+The upstream Network UPS Tools source code is distributed under its own license terms. Debian packaging files retain their respective upstream and Debian copyright and license notices.
+
+Do not treat this file as relicensing the upstream NUT source code or Debian packaging. When the complete source and packaging inputs are added, retain their original copyright and license metadata and include the applicable Debian copyright file.
