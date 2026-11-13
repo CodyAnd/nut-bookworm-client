@@ -51,6 +51,12 @@ The initial build produced:
 
 Debug-symbol packages were also produced by the build system.
 
-## Reproducibility status
+## Build and validation status
 
-The initial build succeeded, but this repository does not yet contain the complete packaging tree, dependency manifest, or an automated clean-checkout build script. Until those are committed and a clean rebuild is verified, the build should be treated as **successfully built once, not yet proven reproducible**.
+The repository contains the Debian packaging tree and the corresponding Debian packaging source archive. The selected binary packages have been built successfully in CT 125.
+
+The generated packages were inspected, transferred to the Debian 12 PBS test host, and their SHA-256 checksums were verified after transfer. Both packages were installed successfully. The installed `nut-monitor.service` uses `/usr/lib/tmpfiles.d/nut-client.conf`; its `ExecStartPre` command succeeds, the service is active, and `upsc` reports `ups.status: OL`.
+
+The build command used `-d`, which bypasses the source package's generic Build-Depends check. This does not establish that all build dependencies are declared or available in a clean environment.
+
+**Reproducibility has not yet been established.** A clean build from a fresh repository checkout with an explicitly validated dependency set remains to be performed. The full NUT FSD and coordinated shutdown sequence have not been tested.

@@ -22,6 +22,7 @@ The working `debian/rules` differed from the original Bookworm rules in these wa
 1. Disabled unneeded server-side and hardware integrations for this client-only package build: CGI, USB, SNMP, Avahi, IPMI, FreeIPMI, Powerman, and Modbus.
 2. Added creation of placeholder `NEWS` and `README` files before `dh_autoreconf`, because the upstream 2.8.1 source tree uses `NEWS.adoc` and `README.adoc` and the autoreconf step expects the legacy filenames.
 3. Changed the documentation input from the absent `TODO` to the upstream `TODO.adoc`.
+4. Corrected the `nut-monitor.service` tmpfiles configuration path during Debian package installation. The upstream service template refers to `/usr/lib/tmpfiles.d/nut-common-tmpfiles.conf`, but the selected `nut-client` package ships `/usr/lib/tmpfiles.d/nut-client.conf`. The Debian rules now check for the expected original path and replace it with the path provided by `nut-client`.
 
 The configure run selected man-page documentation only because the selected binary package set did not include `nut-doc`.
 
@@ -38,6 +39,10 @@ The PBS package set does not include NUT server or hardware driver packages.
 - The generated `upsmon.conf(5)` man page documents `SHUTDOWNEXIT boolean|number`.
 - On the Debian 12 PBS host, `upsmon -V` reported NUT 2.8.1 and `ldd` resolved `libupsclient.so.6`.
 - An APT simulation showed exactly two upgrades and no package additions or removals.
-- The packages were installed with service start/restart actions blocked; the existing NUT configuration files were retained.
+- The generated `nut-client` package was checked to contain `/usr/lib/tmpfiles.d/nut-client.conf` and to reference that path in `nut-monitor.service`.
+- The package checksums were verified after transfer to the Debian 12 PBS test host.
+- Both packages were installed on PBS, preserving the existing `/etc/nut/nut.conf` and `/etc/nut/upsmon.conf`.
+- After installation, `nut-monitor.service` was active and its `ExecStartPre` command completed successfully.
+- `upsc` successfully queried the Primary and returned `ups.status: OL`.
 
-The exact final `debian/rules`, changelog, control files, and any additional required packaging files must be committed before these notes can be considered a complete build recipe.
+A full NUT FSD test and coordinated Primary/Secondary shutdown test have not been performed. A clean build from a fresh repository checkout with an explicitly validated dependency set is also still outstanding.

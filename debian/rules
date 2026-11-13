@@ -64,6 +64,10 @@ override_dh_autoreconf:
 override_dh_auto_install-arch:
 	dh_auto_install
 
+	# Use the tmpfiles configuration shipped by nut-client.
+	grep -qF '/usr/lib/tmpfiles.d/nut-common-tmpfiles.conf' $(CURDIR)/debian/tmp/lib/systemd/system/nut-monitor.service
+	sed -i 's|/usr/lib/tmpfiles.d/nut-common-tmpfiles.conf|/usr/lib/tmpfiles.d/nut-client.conf|' $(CURDIR)/debian/tmp/lib/systemd/system/nut-monitor.service
+
 	# install the bash completion script
 	mkdir -p $(CURDIR)/debian/tmp/usr/share/bash-completion/completions/
 	cp $(CURDIR)/scripts/misc/nut.bash_completion \

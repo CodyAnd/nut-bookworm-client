@@ -1,6 +1,6 @@
 # NUT 2.8.1 client for Debian 12 (Bookworm)
 
-A reproducible, Bookworm-compatible build of the NUT client components used by a Proxmox Backup Server (PBS) NUT Secondary.
+A Bookworm-compatible build of the NUT client components used by a Proxmox Backup Server (PBS) NUT Secondary.
 
 ## Scope
 
@@ -21,14 +21,16 @@ The built `upsmon` binary and generated `upsmon.conf(5)` manual were checked for
 
 ## Build status
 
-The initial package build has succeeded in an isolated Debian 12 LXC build container. The resulting packages were installed on a Debian 12 PBS test host:
+The selected client packages have been successfully built in an isolated Debian 12 LXC build container:
 
 - `nut-client 2.8.1-7~bookworm1`
 - `libupsclient6 2.8.1-7~bookworm1`
 
-The package upgrade preserved the existing `/etc/nut/nut.conf` and `/etc/nut/upsmon.conf` files. Service start/restart actions were blocked during that installation; the PBS NUT monitor was left inactive.
+The generated package contents were inspected. The `nut-monitor.service` unit in `nut-client` references the tmpfiles configuration shipped by that package: `/usr/lib/tmpfiles.d/nut-client.conf`.
 
-**Reproducibility work is still in progress.** The exact build scripts and complete packaging inputs must be committed and tested from a clean checkout before this repository can claim a fully reproducible build.
+Both packages were installed and tested on a Debian 12 PBS host. The existing `/etc/nut/nut.conf` and `/etc/nut/upsmon.conf` configuration was preserved. The `nut-monitor.service` is active, its `ExecStartPre` command succeeds, and `upsc` reports the UPS status as `OL`.
+
+**Reproducibility is not yet established.** A clean build from a fresh repository checkout, with all build dependencies explicitly installed and validated, has not yet been completed. A full NUT FSD and coordinated shutdown test has also not been performed.
 
 ## Repository contents
 
