@@ -1,0 +1,5 @@
+debian/tmp/usr/share/man/man8/adelsystem_cbi.8
+debian/tmp/usr/share/man/man8/generic_modbus.8
+debian/tmp/usr/share/man/man8/huawei-ups2000.8
+debian/tmp/usr/share/man/man8/phoenixcontact_modbus.8
+debian/tmp/usr/share/man/man8/socomec_jbus.8

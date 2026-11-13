@@ -1,0 +1,7 @@
+# SUBSYSTEM is tested at the begining of the file
+nut-server: udev-rule-missing-subsystem vendor/product matching missing SUBSYSTEM specifier [lib/udev/rules.d/62-nut-usbups.rules:*]
+# In LSB world, the drivers are started by nut-server initscript
+nut-server: package-supports-alternative-init-but-no-init.d-script lib/systemd/system/nut-driver.service
+# nut.target and nut-driver.target are shipped in this source package
+nut-server: systemd-service-file-refers-to-unusual-wantedby-target nut-driver.target [*]
+nut-server: systemd-service-file-refers-to-unusual-wantedby-target nut.target [*]

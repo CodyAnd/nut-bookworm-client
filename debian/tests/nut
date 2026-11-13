@@ -1,0 +1,6 @@
+#!/bin/bash
+#------------
+# Testing nut
+#------------
+set -e
+python3 `dirname $0`/test-nut.py 2>&1

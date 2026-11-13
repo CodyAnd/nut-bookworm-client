@@ -7,14 +7,15 @@
 *.buildinfo
 *.dsc
 *.tar.*
+
+# Generated Debian packaging build files and directories
 debian/.debhelper/
+debian/nut/
+debian/tmp/
 debian/debhelper-build-stamp
 debian/files
 debian/*.substvars
-debian/tmp/
-debian/*/
-!debian/patches/
-!debian/source/
+debian/*.debhelper.log
 
 # Local build work
 build/

@@ -1,0 +1,3 @@
+Tests: nut
+Depends: lsb-release, netcat, nut-client, nut-server, psmisc, python3
+Restrictions: needs-root

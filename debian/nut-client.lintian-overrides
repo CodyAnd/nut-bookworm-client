@@ -1,0 +1,5 @@
+# This symlink is needed to integrate into the sysv halt initscript
+# and to poweroff the UPS in case of power failure
+nut-client: init-script-is-not-a-file [etc/init.d/ups-monitor]
+nut-client: script-in-etc-init.d-not-registered-via-update-rc.d [etc/init.d/ups-monitor]
+nut-client: systemd-service-file-refers-to-unusual-wantedby-target nut.target [*]

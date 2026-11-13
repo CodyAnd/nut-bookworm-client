@@ -1,0 +1,5 @@
+debian/tmp/lib/nut/adelsystem_cbi
+debian/tmp/lib/nut/generic_modbus
+debian/tmp/lib/nut/huawei-ups2000
+debian/tmp/lib/nut/phoenixcontact_modbus
+debian/tmp/lib/nut/socomec_jbus

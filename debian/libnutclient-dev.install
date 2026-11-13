@@ -1,0 +1,9 @@
+usr/include/nutclient.h
+usr/include/nutclientmem.h
+usr/include/nutscan-serial.h
+usr/lib/*/libnutclient.a
+usr/lib/*/libnutclient.so
+usr/lib/*/libnutclientstub.a
+usr/lib/*/libnutclientstub.so
+usr/lib/*/pkgconfig/libnutclient.pc
+usr/lib/*/pkgconfig/libnutclientstub.pc

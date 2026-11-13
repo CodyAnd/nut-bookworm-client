@@ -1,0 +1,29 @@
+diff -up -r a/conf/upsstats.html.sample b/conf/upsstats.html.sample
+--- a/conf/upsstats.html.sample	2022-04-23 11:56:07.000000000 +0000
++++ b/conf/upsstats.html.sample	2022-07-05 21:53:19.935000000 +0000
+@@ -188,9 +188,4 @@ th, td{padding:0.5ex;}
+ </td></tr>
+ </table>
+ 
+-<hr><div><small>
+-<a href="https://jigsaw.w3.org/css-validator/check/referer"><img style="float:right" src="https://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" height="31" width="88"></a>
+-<a href="https://validator.w3.org/check?uri=referer"><img style="float:right" src="https://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01 Strict" height="31" width="88"></a>
+-</small></div>
+-
+ </body></html>
+diff -up -r a/conf/upsstats-single.html.sample b/conf/upsstats-single.html.sample
+--- a/conf/upsstats-single.html.sample	2022-04-23 11:56:07.000000000 +0000
++++ b/conf/upsstats-single.html.sample	2022-07-05 21:53:36.733000000 +0000
+@@ -292,12 +292,5 @@ table{background:#000;}
+ </tr>
+ 
+ </table>
+-<div><a href="https://jigsaw.w3.org/css-validator/check/referer"><img
+-      style="float:right" src="https://jigsaw.w3.org/css-validator/images/vcss"
+-      alt="Valid CSS" title="Valid CSS" height="31" width="88"></a>
+-<a href="https://validator.w3.org/check?uri=referer"><img
+-      style="float:right" src="https://www.w3.org/Icons/valid-html401"
+-      alt="Valid HTML 4.01 Strict" title="Valid HTML 4.01 Strict"
+-      height="31" width="88"></a></div>
+ </body>
+ </html>

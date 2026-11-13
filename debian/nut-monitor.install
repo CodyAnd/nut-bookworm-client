@@ -1,0 +1,10 @@
+scripts/python/app/NUT-Monitor-py3qt5 usr/bin/
+scripts/python/app/icons/256x256/nut-monitor.png usr/share/icons/hicolor/256x256/apps/
+scripts/python/app/icons/48x48/nut-monitor.png usr/share/icons/hicolor/48x48/apps/
+scripts/python/app/icons/64x64/nut-monitor.png usr/share/icons/hicolor/64x64/apps/
+scripts/python/app/icons/scalable/nut-monitor.svg usr/share/icons/hicolor/scalable/apps/
+scripts/python/app/locale/ usr/share/
+scripts/python/app/nut-monitor-py3qt5.desktop usr/share/applications/
+scripts/python/app/nut-monitor.appdata.xml usr/share/metainfo/
+scripts/python/app/pixmaps usr/share/NUT-Monitor-py3qt5/
+scripts/python/app/ui/ usr/share/NUT-Monitor-py3qt5/

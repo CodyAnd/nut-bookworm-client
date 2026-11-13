@@ -1,0 +1,2 @@
+lib/*/libnutclient.so.*
+lib/*/libnutclientstub.so.*

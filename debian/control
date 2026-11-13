@@ -1,0 +1,333 @@
+Source: nut
+Section: admin
+Priority: optional
+Maintainer: Laurent Bigonville <bigon@debian.org>
+Build-Depends: asciidoc <!nodoc>,
+               debhelper (>= 12),
+               dh-python,
+               docbook-xml <!nodoc>,
+               libavahi-client-dev,
+               libavahi-core-dev,
+               libfreeipmi-dev [!hurd-i386],
+               libgd-dev | libgd2-xpm-dev | libgd2-noxpm-dev,
+               libi2c-dev [linux-any],
+               libipmimonitoring-dev [!hurd-i386],
+               libltdl-dev,
+               libmodbus-dev,
+               libneon27-gnutls-dev | libneon27-dev,
+               libnss3-dev,
+               libpowerman0-dev,
+               libsnmp-dev | libsnmp9-dev,
+               libusb-1.0-0-dev,
+               libwrap0-dev,
+               libxml2-utils <!nodoc>,
+               python3:any,
+               xsltproc <!nodoc>
+Build-Depends-Indep: asciidoc-dblatex <!nodoc>,
+                     dblatex <!nodoc>,
+                     docbook-xsl <!nodoc>
+Standards-Version: 4.6.0
+Homepage: https://networkupstools.org/
+Vcs-Browser: https://salsa.debian.org/debian/nut
+Vcs-Git: https://salsa.debian.org/debian/nut.git
+
+Package: nut
+Architecture: all
+Section: metapackages
+Depends: nut-client, nut-server, ${misc:Depends}
+Description: network UPS tools - metapackage
+ Network UPS Tools (NUT) is a client/server monitoring system that
+ allows computers to share uninterruptible power supply (UPS) and
+ power distribution unit (PDU) hardware. Clients access the hardware
+ through the server, and are notified whenever the power status
+ changes.
+ .
+ This package is a metapackage that installs both nut-server and nut-client,
+ in most cases it is sufficient for a basic UPS monitoring system.
+
+Package: nut-server
+Architecture: any
+Depends: adduser,
+         lsb-base,
+         nut-client (= ${binary:Version}),
+         udev [linux-any],
+         ${misc:Depends},
+         ${shlibs:Depends}
+Suggests: nut-cgi, nut-i2c, nut-ipmi, nut-modbus, nut-snmp, nut-xml
+Pre-Depends: ${misc:Pre-Depends}
+Description: network UPS tools - core system
+ Network UPS Tools (NUT) is a client/server monitoring system that
+ allows computers to share uninterruptible power supply (UPS) and
+ power distribution unit (PDU) hardware. Clients access the hardware
+ through the server, and are notified whenever the power status
+ changes.
+ .
+ This package provides NUT's core system, and the serial and USB UPS
+ drivers.
+
+Package: nut-client
+Architecture: any
+Depends: adduser, lsb-base, ${misc:Depends}, ${shlibs:Depends}
+Provides: ups-monitor
+Conflicts: ups-monitor
+Recommends: bash-completion
+Suggests: nut-monitor
+Replaces: ups-monitor
+Pre-Depends: ${misc:Pre-Depends}
+Description: network UPS tools - clients
+ Network UPS Tools (NUT) is a client/server monitoring system that
+ allows computers to share uninterruptible power supply (UPS) and
+ power distribution unit (PDU) hardware. Clients access the hardware
+ through the server, and are notified whenever the power status
+ changes.
+ .
+ This package provides NUT's clients that allows the user to control
+ and monitor the UPS.
+
+Package: nut-cgi
+Architecture: any
+Depends: adduser, ${misc:Depends}, ${shlibs:Depends}
+Recommends: apache2 | httpd-cgi
+Suggests: nut
+Description: network UPS tools - web interface
+ Network UPS Tools (NUT) is a client/server monitoring system that
+ allows computers to share uninterruptible power supply (UPS) and
+ power distribution unit (PDU) hardware. Clients access the hardware
+ through the server, and are notified whenever the power status
+ changes.
+ .
+ This package provides an HTTP interface for Network UPS Tools which makes
+ it possible to monitor the core NUT system with a web browser.
+
+Package: nut-i2c
+Architecture: linux-any
+Depends: nut-server (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}
+Description: network UPS tools - I2C driver
+ Network UPS Tools (NUT) is a client/server monitoring system that
+ allows computers to share uninterruptible power supply (UPS) and
+ power distribution unit (PDU) hardware. Clients access the hardware
+ through the server, and are notified whenever the power status
+ changes.
+ .
+ This package provides nut-i2c, a collection of drivers for UPS systems
+ with I2C-based communication protocols.
+
+Package: nut-snmp
+Architecture: any
+Depends: nut-server (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}
+Description: network UPS tools - SNMP driver
+ Network UPS Tools (NUT) is a client/server monitoring system that
+ allows computers to share uninterruptible power supply (UPS) and
+ power distribution unit (PDU) hardware. Clients access the hardware
+ through the server, and are notified whenever the power status
+ changes.
+ .
+ This package provides snmp-ups, the SNMP multi-MIB driver for UPS, which
+ supports various MIBs including IETF, MGE, and APC. It adds an SNMP
+ Manager interface to the core NUT system.
+
+Package: nut-ipmi
+Architecture: kfreebsd-any linux-any
+Depends: nut-server (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}
+Description: network UPS tools - IPMI driver
+ Network UPS Tools (NUT) is a client/server monitoring system that
+ allows computers to share uninterruptible power supply (UPS) and
+ power distribution unit (PDU) hardware. Clients access the hardware
+ through the server, and are notified whenever the power status
+ changes.
+ .
+ This package currently provides nut-ipmipsu, a driver which allows the user to
+ monitor IPMI power supply units (PSU) found in servers of popular brands, such
+ as Dell, HP, IBM. It adds an IPMI interface to the core NUT system.
+
+Package: nut-modbus
+Architecture: any
+Depends: nut-server (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}
+Description: network UPS tools - Modbus driver
+ Network UPS Tools (NUT) is a client/server monitoring system that
+ allows computers to share uninterruptible power supply (UPS) and
+ power distribution unit (PDU) hardware. Clients access the hardware
+ through the server, and are notified whenever the power status
+ changes.
+ .
+ This package provides nut-modbus, a collection of drivers for UPS systems
+ with Modbus-based communication protocols.
+
+Package: nut-xml
+Architecture: any
+Depends: nut-server (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}
+Description: network UPS tools - XML/HTTP driver
+ Network UPS Tools (NUT) is a client/server monitoring system that
+ allows computers to share uninterruptible power supply (UPS) and
+ power distribution unit (PDU) hardware. Clients access the hardware
+ through the server, and are notified whenever the power status
+ changes.
+ .
+ This package provides netxml-ups, which supports UPS models from
+ Eaton or MGE that use an XML/HTTP-based Network Management Card or
+ Proxy.
+
+Package: nut-powerman-pdu
+Architecture: any
+Depends: nut-server (= ${binary:Version}),
+         powerman,
+         ${misc:Depends},
+         ${shlibs:Depends}
+Description: network UPS tools - PowerMan PDU driver
+ Network UPS Tools (NUT) is a client/server monitoring system that
+ allows computers to share uninterruptible power supply (UPS) and
+ power distribution unit (PDU) hardware. Clients access the hardware
+ through the server, and are notified whenever the power status
+ changes.
+ .
+ This package provides powerman-pdu, which allows NUT clients to communicate
+ with the PowerMan daemon to support PDUs.
+
+Package: nut-doc
+Architecture: all
+Section: doc
+Depends: ${misc:Depends}
+Suggests: doc-base
+Build-Profiles: <!nodoc>
+Multi-Arch: foreign
+Description: network UPS tools - documentation
+ Network UPS Tools (NUT) is a client/server monitoring system that
+ allows computers to share uninterruptible power supply (UPS) and
+ power distribution unit (PDU) hardware. Clients access the hardware
+ through the server, and are notified whenever the power status
+ changes.
+ .
+ This package contains FAQ, user, developer and packager documentation.
+
+Package: libupsclient6
+Section: libs
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
+Description: network UPS tools - client library
+ Network UPS Tools (NUT) is a client/server monitoring system that
+ allows computers to share uninterruptible power supply (UPS) and
+ power distribution unit (PDU) hardware. Clients access the hardware
+ through the server, and are notified whenever the power status
+ changes.
+ .
+ This package provides the shared client library.
+
+Package: libupsclient-dev
+Section: libdevel
+Architecture: any
+Depends: libnss3-dev,
+         libupsclient6 (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends}
+Multi-Arch: same
+Description: network UPS tools - development files
+ Network UPS Tools (NUT) is a client/server monitoring system that
+ allows computers to share uninterruptible power supply (UPS) and
+ power distribution unit (PDU) hardware. Clients access the hardware
+ through the server, and are notified whenever the power status
+ changes.
+ .
+ This package provides the development files.
+
+Package: libnutclient2
+Section: libs
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
+Description: network UPS tools - new client library
+ Network UPS Tools (NUT) is a client/server monitoring system that
+ allows computers to share uninterruptible power supply (UPS) and
+ power distribution unit (PDU) hardware. Clients access the hardware
+ through the server, and are notified whenever the power status
+ changes.
+ .
+ This package provides the new shared client library.
+
+Package: libnutclient-dev
+Section: libdevel
+Architecture: any
+Depends: libnutclient2 (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends}
+Multi-Arch: same
+Description: network UPS tools - development files for the new client library
+ Network UPS Tools (NUT) is a client/server monitoring system that
+ allows computers to share uninterruptible power supply (UPS) and
+ power distribution unit (PDU) hardware. Clients access the hardware
+ through the server, and are notified whenever the power status
+ changes.
+ .
+ This package provides the development files for the new client library.
+
+Package: libnutscan2
+Section: libs
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
+Description: network UPS tools - scanner library
+ Network UPS Tools (NUT) is a client/server monitoring system that
+ allows computers to share uninterruptible power supply (UPS) and
+ power distribution unit (PDU) hardware. Clients access the hardware
+ through the server, and are notified whenever the power status
+ changes.
+ .
+ This package provides the shared scanner library.
+
+Package: libnutscan-dev
+Section: libdevel
+Architecture: any
+Depends: libnutscan2 (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}
+Breaks: libupsclient-dev (<< 2.7.4-9~)
+Replaces: libupsclient-dev (<< 2.7.4-9~)
+Multi-Arch: same
+Description: network UPS tools - development files for the scanner library
+ Network UPS Tools (NUT) is a client/server monitoring system that
+ allows computers to share uninterruptible power supply (UPS) and
+ power distribution unit (PDU) hardware. Clients access the hardware
+ through the server, and are notified whenever the power status
+ changes.
+ .
+ This package provides the development files for the scanner library.
+
+Package: python3-nut
+Section: python
+Architecture: all
+Depends: ${misc:Depends}, ${python3:Depends}
+Description: network UPS tools - Python3 bindings for NUT server
+ Network UPS Tools (NUT) is a client/server monitoring system that
+ allows computers to share uninterruptible power supply (UPS) and
+ power distribution unit (PDU) hardware. Clients access the hardware
+ through the server, and are notified whenever the power status
+ changes.
+ .
+ This package provides Python3 bindings to connect to NUT server.
+
+Package: nut-monitor
+Architecture: all
+Depends: python3-nut, python3-pyqt5, ${misc:Depends}, ${python3:Depends}
+Description: network UPS tools - GUI application to monitor UPS status
+ Network UPS Tools (NUT) is a client/server monitoring system that
+ allows computers to share uninterruptible power supply (UPS) and
+ power distribution unit (PDU) hardware. Clients access the hardware
+ through the server, and are notified whenever the power status
+ changes.
+ .
+ This package provides nut-monitor, a GUI application to monitor UPS status.
+
+Package: libups-nut-perl
+Section: perl
+Architecture: all
+Depends: ${misc:Depends}, ${perl:Depends}
+Multi-Arch: foreign
+Description: network UPS tools - Perl bindings for NUT server
+ Network UPS Tools (NUT) is a client/server monitoring system that
+ allows computers to share uninterruptible power supply (UPS) and
+ power distribution unit (PDU) hardware. Clients access the hardware
+ through the server, and are notified whenever the power status
+ changes.
+ .
+ This package provides Perl bindings to connect to NUT server.
