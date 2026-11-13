@@ -1,0 +1,22 @@
+# Debian package build outputs
+*.deb
+*.udeb
+*.ddeb
+*.changes
+*.build
+*.buildinfo
+*.dsc
+*.tar.*
+debian/.debhelper/
+debian/debhelper-build-stamp
+debian/files
+debian/*.substvars
+debian/tmp/
+debian/*/
+!debian/patches/
+!debian/source/
+
+# Local build work
+build/
+dist/
+*.log
